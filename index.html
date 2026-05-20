@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Code Hydom | المنصة الأولى للهدايا والذكريات الرقمية</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="floatingContainer" class="floating-container"></div>
+    <div class="ambient-glow"></div>
+
+    <a href="https://wa.me/201009694831" class="whatsapp-floating-premium" target="_blank" aria-label="تواصل عبر الواتساب">💬</a>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">Code Hydom</div>
+            <nav class="desktop-nav">
+                <a href="#counters">الإحصائيات</a>
+                <a href="#occasions">المناسبات</a>
+                <a href="#pricing">الباقات</a>
+            </nav>
+            <div class="header-actions">
+                <button id="themeToggle" class="theme-toggle-btn" title="تبديل الوضع الليلي/النهاري">
+                    <span class="icon">🌓</span>
+                </button>
+                <a href="#order" class="premium-btn-solid">يلا نبدأ صمم هديتك</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="trust-badge">✨ المنصة الأولى لإهداء الذكريات التفاعلية</div>
+        <h1>اعمل أحلى مفاجأة، <br><span>ذكرى تعيش العمر كله</span></h1>
+        <p>ابعت مشاعرك في صفحة ويب معمولة مخصوص ليكم.. صوركم، قائمة الأغاني المفضلة، عداد لأيامكم، ورسايل سرية محدش هيشوفها غيركم بـ باسورد! 🔒</p>
+        <div class="hero-buttons">
+            <a href="#order" class="premium-btn-solid hero-btn">يلا نبدأ نصمم هديتك  ←</a>
+        </div>
+        <div class="security-note">🛡️ أمان تام وخصوصية 100% لبياناتك وصورك.</div>
+    </section>
+
+    <section class="section" id="counters">
+        <div class="counters-grid">
+            <div class="counter-card">
+                <div class="counter-number" data-target="543215">+0</div>
+                <div class="counter-label">زيارة للمنصة</div>
+            </div>
+            <div class="counter-card">
+                <div class="counter-number" data-target="13019">+0</div>
+                <div class="counter-label">عميل وثق بنا</div>
+            </div>
+            <div class="counter-card">
+                <div class="counter-number" data-target="16007">+0</div>
+                <div class="counter-label">ذكرى صممناها</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="occasions">
+        <div class="section-header">
+            <h2>أياً كانت مناسبتك، <span>الهدية دي عشانك 🎁</span></h2>
+            <p>اختر المناسب لطلبك لتخصيص القوالب والمؤثرات البرمجية بما يتوافق مع الحدث (اضغط للحجز والاستفسار الفوري).</p>
+        </div>
+        <div class="occasions-grid">
+            <div class="occasion-card" onclick="sendOccasionWA('للمخطوبين')">
+                <div class="occ-icon">💎</div>
+                <h3>للمخطوبين</h3>
+            </div>
+            <div class="occasion-card" onclick="sendOccasionWA('للكابلز')">
+                <div class="occ-icon">💖</div>
+                <h3>للكابلز</h3>
+            </div>
+            <div class="occasion-card" onclick="sendOccasionWA('عيد ميلاد')">
+                <div class="occ-icon">🎂</div>
+                <h3>عيد ميلاد</h3>
+            </div>
+            <div class="occasion-card" onclick="sendOccasionWA('عيد جوازكم')">
+                <div class="occ-icon">🥂</div>
+                <h3>عيد جوازكم</h3>
+            </div>
+            <div class="occasion-card" onclick="sendOccasionWA('تصالح حبيبك')">
+                <div class="occ-icon">🥺</div>
+                <h3>تصالح حبيبك</h3>
+            </div>
+            <div class="occasion-card" onclick="sendOccasionWA('سنة جديدة')">
+                <div class="occ-icon">✨</div>
+                <h3>سنة جديدة</h3>
+            </div>
+            <div class="occasion-card" onclick="sendOccasionWA('فكرة مجنونة')">
+                <div class="occ-icon">💡</div>
+                <h3>فكرة مجنونة؟</h3>
+            </div>
+            <div class="occasion-card" onclick="sendOccasionWA('هدية رمضان')">
+                <div class="occ-icon">🌙</div>
+                <h3>هدية رمضان</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="pricing">
+        <div class="section-header">
+            <h2>خطط الأسعار <span>والباقات الاحترافية</span></h2>
+            <p>أسعار ثابتة ومحددة بدون أي تكاليف مخفية، مع استضافة سحابية مجانية مدى الحياة.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>الباقة الأساسية</h3>
+                <div class="price">٢٠٠ <span>ج.م</span></div>
+                <ul class="price-features">
+                    <li>صفحة هبوط مخصصة ومصممة بالكامل</li>
+                    <li>عداد زمني رقمي ديناميكي يحسب المدة</li>
+                    <li>كتابة رسالة الذكرى الطويلة والمؤثرة</li>
+                    <li>استضافة سحابية مجانية وسريعة دائمًا</li>
+                </ul>
+                <a href="#order" class="premium-btn-outline select-pkg-btn" data-package="الأساسية">اختار الأساسية</a>
+            </div>
+            
+            <div class="price-card featured">
+                <div class="popular-badge">الاختيار الأكثر طلباً 🔥</div>
+                <h3>الباقة المميزة</h3>
+                <div class="price">٣٥٠ <span>ج.م</span></div>
+                <ul class="price-features">
+                    <li>كل المزايا الموجودة في الباقة الأساسية</li>
+                    <li>بوابة حماية مشفرة بكلمة سر من اختيارك</li>
+                    <li>إمكانية حصر حتي 5 صور مشتركة بالموقع</li>
+                    <li>تأثيرات وخلفيات متحركة راقية مريحة للعين</li>
+                </ul>
+                <a href="#order" class="premium-btn-solid select-pkg-btn" data-package="المميزة">اختار المميزة</a>
+            </div>
+
+            <div class="price-card vip-card">
+                <div class="popular-badge vip-badge">الملكية VIP 👑</div>
+                <h3>باقة الـ VIP</h3>
+                <div class="price">٨٠٠ <span>ج.م</span></div>
+                <ul class="price-features">
+                    <li>كل المزايا الموجودة في الباقة المميزة</li>
+                    <li>دمج مشغل موسيقى وقوائم أغاني مخصصة</li>
+                    <li>دومين ونطاق مخصص باسمك واسم شريكك (Domain)</li>
+                    <li>دعم فني متاح وتعديلات مفتوحة لمدة شهر كامل</li>
+                </ul>
+                <a href="#order" class="premium-btn-outline select-pkg-btn" data-package="VIP" style="border-color: #fbbf24; color: #fbbf24;">اختار الـ VIP</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="order">
+        <div class="form-container-premium">
+            <form id="whatsappForm" autocomplete="off">
+                <h2 style="text-align: center; margin-bottom: 30px;">جاهز تعمل <span>أحلى مفاجأة؟ 😍</span></h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>الباقة المطلوبة</label>
+                        <select name="packageSelection" id="packageSelection" required>
+                            <option value="الباقة الأساسية (200 ج.م)">الباقة الأساسية — 200 ج.م</option>
+                            <option value="الباقة المميزة (350 ج.م)" selected>الباقة المميزة — 350 ج.م (الأكثر طلباً)</option>
+                            <option value="باقة VIP الملكية (800 ج.م)">باقة VIP الملكية — 800 ج.م</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>اسمك الكريم</label>
+                        <input type="text" name="clientName" placeholder="مثال: أحمد محمد" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>اسم شريك حياتك (الطرف الثاني)</label>
+                        <input type="text" name="partnerName" placeholder="مثال: منى أحمد" required>
+                    </div>
+
+                    <div class="form-grid full-width" style="margin-bottom: 0;">
+                        <div class="form-group">
+                            <label>كود فتح البوابة السري المطلوب للموقع</label>
+                            <input type="text" name="passcode" placeholder="مثال: تاريخ مميز أو رقم سري" required>
+                        </div>
+                        <div class="form-group">
+                            <label>رابط الأغنية المباشر (إن وجد)</label>
+                            <input type="text" id="songLink" placeholder="أنسخ رابط الأغنية هنا (يوتيوب / سبوتيفاي)">
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>رسالة الذكرى الطويلة أو تفاصيل الرواية</label>
+                        <textarea name="message" placeholder="اكتب هنا نص الرسالة بعناية أو أي ملاحظات إضافية ترغب بدمجها في الأسطر..." required></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>تحديد صور الذكرى (حتى 5 صور)</label>
+                        <div class="premium-upload-widget" onclick="document.getElementById('imageFiles').click()">
+                            <div class="widget-meta">
+                                <span class="widget-icon">🖼️</span>
+                                <div class="widget-text">
+                                    <strong>اضغط لتحديد الصور من جهازك</strong>
+                                    <span>سيتم حصرهم وتأكيدهم لاحقاً بالشات بأمان تام</span>
+                                </div>
+                            </div>
+                            <input type="file" id="imageFiles" multiple accept="image/*">
+                            <div id="imageStatus" class="widget-status">ولم يتم ربط ملفات بعد</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="premium-submit-btn">يلا نطلب دلوقتي 🚀</button>
+            </form>
+            <div class="form-footer-note">🛡️ متقلقش خالص! كل صورك ورسايلك مشفرة ومحمية بـ باسورد عشان خصوصيتكم 100%.</div>
+        </div>
+    </section>
+
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-box-premium">
+            <div class="modal-badge-icon">✓</div>
+            <h3>تم تشفير وتجهيز بياناتك بنجاح!</h3>
+            <p>احتراماً لخصوصيتك الكاملة وصورك الشخصية، سيقوم النظام بنقلك الآن فوراً لشات الواتساب الرسمي لإرفاق الصور والأغاني دفعة واحدة دون تداولها علناً.</p>
+            <button id="modalCloseBtn">موافق، الانتقال للواتساب 💬</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-brand">Code Hydom</div>
+        <div class="footer-social-container">
+            <a href="https://wa.me/201009694831" target="_blank" class="social-icon-btn whatsapp-color"><span>WhatsApp</span></a>
+            <a href="https://www.tiktok.com/@code.hydom" target="_blank" class="social-icon-btn tiktok-color"><span>TikTok</span></a>
+            <a href="https://www.instagram.com/code.hydom/" target="_blank" class="social-icon-btn instagram-color"><span>Instagram</span></a>
+        </div>
+        <p class="copyright-text">© 2026 Code Hydom Platform. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
