@@ -1,5 +1,13 @@
 const whatsappNumber = "201009694831";
 
+// 👑 تهيئة سوبابيز بالمفاتيح الخاصة بك (استبدل القيم دي بمفاتيح مشروعك)
+const SUPABASE_URL = "https://xpcyddifuekknohywuqf.supabase.co"; 
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhwY3lkZGlmdWVra25vaHl3dXFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5Nzg1NTcsImV4cCI6MjA5OTU1NDU1N30.7nYwBcui4r6Xbyrr7LIkBTMwh-hoFP6FDzbMix-dHUs";
+
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let finalTemplateUrl = "";
+
 // 1️⃣ مُبدل الثيمات (Light / Dark Mode) المطور
 const themeToggle = document.getElementById('themeToggle');
 const bodyElement = document.documentElement;
@@ -11,7 +19,7 @@ themeToggle.addEventListener('click', () => {
     themeToggle.querySelector('.icon').textContent = newTheme === 'dark' ? '🌓' : '☀️';
 });
 
-// 2️⃣ توليد نظام الأشكال الطائرة (Floating Elements) في الخلفية زي الفيديو بالظبط
+// 2️⃣ نظام العناصر الطائرة (Floating Elements) في الخلفية
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById('floatingContainer');
     const shapes = ['❤️', '✨', '🎈', '🎵', '✦', '🌸'];
@@ -39,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(createShape, 600);
 });
 
-// 3️⃣ ربط كروت المناسبات بجمل تسويقية فورية وموجهة لشات الواتساب المباشر
+// 3️⃣ ربط كروت المناسبات بجمل تسويقية موجهة للواتساب
 function sendOccasionWA(occasionType) {
     let customMsg = "";
 
@@ -60,7 +68,7 @@ function sendOccasionWA(occasionType) {
             customMsg = "كنت عايز فكرة هدية رقمية وموقع ويب مخصوص عشان أصالح بيه حبيبتي وتشوف رسايلنا سوا 🥺";
             break;
         case 'سنة جديدة':
-            customMsg = "عايز أجهز موقع ويب تهنئة وبداية مميزة مع شريكي للسنة الجديدة 🎆";
+            customMsg = "عايز أجمع موقع ويب تهنئة وبداية مميزة مع شريكي للسنة الجديدة 🎆";
             break;
         case 'فكرة مجنونة':
             customMsg = "عندي فكرة موقع ويب ومؤثرات برمجية مجنونة ومختلفة وعايز أطبقها معاكم هنا 💡";
@@ -101,12 +109,12 @@ document.querySelectorAll('.select-pkg-btn').forEach(button => {
     button.addEventListener('click', () => {
         const pkg = button.getAttribute('data-package');
         const packageSelection = document.getElementById('packageSelection');
-        if (pkg === "الأساسية") {
-            packageSelection.value = "الباقة الأساسية (200 ج.م)";
-        } else if (pkg === "المميزة") {
-            packageSelection.value = "الباقة المميزة (350 ج.م)";
+        if (pkg === "الجيل الصاعد (10-17 سنة)") {
+            packageSelection.value = "باقة الجيل الصاعد 10-17 سنة (150 ج.م)";
+        } else if (pkg === "الرومانسية (17-22 سنة)") {
+            packageSelection.value = "الباقة الرومانسية 17-22 سنة (250 ج.م)";
         } else {
-            packageSelection.value = "باقة VIP الملكية (800 ج.م)";
+            packageSelection.value = "الباقة الفخمة 22+ سنة (300 ج.م)";
         }
     });
 });
@@ -119,13 +127,13 @@ const songLinkInput = document.getElementById('songLink');
 imageInput.addEventListener('change', () => {
     const count = imageInput.files.length;
     if (count > 0) {
-        if (count > 5) {
-            alert('أقصى عدد مسموح به هو 5 صور فقط للباقة!');
+        if (count > 20) {
+            alert('أقصى عدد مسموح به هو 20 صورة فقط!');
             imageInput.value = '';
             imageStatus.textContent = 'ولم يتم ربط ملفات بعد';
             imageStatus.className = 'widget-status';
         } else {
-            imageStatus.textContent = `✅ تم حصر ${count} صور جاهزة للإرسال`;
+            imageStatus.textContent = `✅ تم اختيار ${count} صور`;
             imageStatus.className = 'widget-status active';
         }
     } else {
@@ -134,48 +142,93 @@ imageInput.addEventListener('change', () => {
     }
 });
 
-// 7️⃣ معالجة إرسال الفورم وحفظ البيانات للواتساب المباشر
+// 7️⃣ معالجة إرسال الفورم ورفع الصور التلقائي لـ Supabase Storage والـ Database
 const form = document.getElementById('whatsappForm');
 const successModal = document.getElementById('successModal');
 const modalCloseBtn = document.getElementById('modalCloseBtn');
+const submitBtn = document.getElementById('submitBtn');
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    // تغيير حالة الزرار أثناء الرفع منعاً للضغط المزدوج
+    submitBtn.innerText = "جاري رفع الصور وتشفير البيانات... ⏳";
+    submitBtn.disabled = true;
+
     const pkg = form.elements['packageSelection'].value;
     const name = form.elements['clientName'].value;
     const partner = form.elements['partnerName'].value;
     const passcode = form.elements['passcode'].value;
     const msg = form.elements['message'].value;
+    const songLink = songLinkInput.value.trim();
 
-    let imageText = "❌ لم يتم حصر صور";
+    let uploadedImageUrls = [];
+
+    // 🎇 حلقة رفع الصور الفورية لـ Supabase Storage Bucket
     if (imageInput.files.length > 0) {
-        imageText = `📸 *الصور الجاهزة:* (${imageInput.files.length} صور) سأرسلها لك حالاً في الشات...`;
+        for (let i = 0; i < imageInput.files.length; i++) {
+            const file = imageInput.files[i];
+            // توليد اسم فريد لكل صورة لتفادي التكرار
+            const fileName = `${Date.now()}_${Math.random().toString(36).substr(2, 9)}_${file.name}`;
+            
+            const { data, error } = await supabase.storage
+                .from('love-images')
+                .upload(fileName, file);
+
+            if (error) {
+                console.error("خطأ في رفع الصورة:", error.message);
+            } else {
+                // استخراج رابط الصورة المباشر والـ Public
+                const { data: publicUrlData } = supabase.storage
+                    .from('love-images')
+                    .getPublicUrl(fileName);
+                
+                uploadedImageUrls.push(publicUrlData.publicUrl);
+            }
+        }
     }
 
-    let musicText = "❌ لم يتم تحديد ملفات صوتية";
-    if (songLinkInput.value.trim() !== "") {
-        musicText = `🔗 *رابط الأغنية المعتمد:* ${songLinkInput.value.trim()}`;
+    // 💾 حفظ كامل الداتا في جدول Database Table
+    const { data, error } = await supabase
+        .from('orders')
+        .insert([
+            {
+                package_selection: pkg,
+                client_name: name,
+                partner_name: partner,
+                passcode: passcode,
+                song_link: songLink,
+                message: msg,
+                image_urls: uploadedImageUrls
+            }
+        ]);
+
+    if (error) {
+        alert("حصل مشكلة في حفظ البيانات السحابية: " + error.message);
+        submitBtn.innerText = "يلا نطلب دلوقتي 🚀";
+        submitBtn.disabled = false;
+        return;
     }
 
-    const waText = `👋 *طلب حجز جديد من منصة كود هيدوم* \n\n` +
-                   `📦 *الباقة المعتمدة:* ${pkg}\n` +
-                   `👤 *اسم العميل:* ${name}\n` +
-                   `❤️ *اسم الطرف الثاني:* ${partner}\n` +
-                   `🔑 *كود البوابة السري:* ${passcode}\n\n` +
-                   `🖼 *الملفات:* ${imageText}\n\n` +
-                   `🎵 *الموسيقى والأغاني:* ${musicText}\n\n` +
-                   `📝 *الرسالة والملاحظات:*\n"${msg}"\n\n` +
-                   `✨ _تأكيد نقل البيانات الآمن، بانتظار إرفاق ملفات الميديا بالشات._`;
+    // تجهيز رسالة الواتساب البسيطة كإشعار إضافي ليك
+    const waText = `👋 *طلب حجز جديد اتحفظ في السحاب!* \n\n` +
+                   `📦 *الباقة:* ${pkg}\n` +
+                   `👤 *العميل:* ${name}\n` +
+                   `❤️ *الطرف الثاني:* ${partner}\n\n` +
+                   `✅ _الصور والرسايل بالكامل اترفعوا على سوبابيز، وجاهز لتأكيد الدفع وشغل الموقع!_`;
 
-    finalWhatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(waText)}`;
+    finalTemplateUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(waText)}`;
     
+    // فتح البوب اب للمستخدم لإعلامه بالنجاح
     successModal.classList.add('active');
 });
 
 modalCloseBtn.addEventListener('click', () => {
     successModal.classList.remove('active');
     form.reset();
+    submitBtn.innerText = "إرسال الطلب وحفظ المفاجأة 🚀";
+    submitBtn.disabled = false;
     imageStatus.textContent = 'ولم يتم ربط ملفات بعد';
     imageStatus.className = 'widget-status';
-    window.open(finalWhatsappUrl, '_blank');
+    window.open(finalTemplateUrl, '_blank');
 });
